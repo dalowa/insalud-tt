@@ -1,15 +1,12 @@
-import { Country } from "./types/countriesAPI-type";
+import { httpClientPlugin } from "@/lib/http-client.plugin";
+import { Country } from "../types/countriesAPI-type";
 
 
 export default async function Home() {
   const URL_COUNTRIES_API = 'https://restcountries.com/v3.1/all?fields=name,cca3,flags,region,population,capital';
 
-
   const getCountries = async () => {
-    const res = await fetch(URL_COUNTRIES_API);
-    
-    const countries:Country[] = await res.json();
-
+    const countries: Country[] = await httpClientPlugin.get(URL_COUNTRIES_API)
     return countries
   }
 
@@ -21,7 +18,7 @@ export default async function Home() {
 
       <ul>
         {countriesList.map((c, i) => (
-          <li key={`${c.name.nativeName + i.toLocaleString()}`}>{c.name.official ?? "Not Found"}</li>
+          <li key={`${c.name.nativeName + i.toLocaleString()}`}>{c.name.common}</li>
         ))}
 
       </ul>
