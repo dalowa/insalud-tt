@@ -45,19 +45,19 @@ export const CountryCardsDisplay = () => {
     setSelectedRegion(value);
     
     if (value === "All") {
-      setCurrentCountriesList(allCountries);
+      setCurrentCountriesList(allCountries.filter(e => e.name.common.includes(inputSearch.trim())));
     } else {
       setCurrentCountriesList(
-        allCountries.filter(country => country.region === value)
+        allCountries.filter(country => country.region === value && country.name.common.includes(inputSearch.trim()))
       );
     }
   };
 
    const onClickSearch = () => {
-      if(inputSearch.trim() == ""){
+      if(inputSearch.trim() == "" && selectedRegion === "All"){
          setCurrentCountriesList(allCountries)
       }else {
-         setCurrentCountriesList(currentCountriesList?.filter(e => e.name.common.includes(inputSearch.trim())))
+         setCurrentCountriesList(allCountries?.filter(e => e.name.common.includes(inputSearch.trim()) && e.region == selectedRegion))
       }
       
    }
@@ -69,7 +69,8 @@ export const CountryCardsDisplay = () => {
       }, []); // Solo una vez al montar
 
    useEffect(() => {
-         setCurrentCountriesList(allCountries) // Actualizar cuando allCountries cambie
+         setCurrentCountriesList(allCountries)
+         /* console.log(cur) */ // Actualizar cuando allCountries cambie
       }, [allCountries]); 
 
 
