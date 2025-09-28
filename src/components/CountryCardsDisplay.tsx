@@ -25,12 +25,33 @@ export const CountryCardsDisplay = () => {
   const [inputSearch, setInputSearch] = useState<string>("")
   const [selectedRegion, setSelectedRegion] = useState<string>("All")
   const [loading, setLoading] = useState(true);
-
+  const [minPopulation, setMinPopulation] = useState<number>(0);
+  const [maxPopulation, setMaxPopulation] = useState<number>(1000000000);
 
 
   const URL_COUNTRIES_API = 'https://restcountries.com/v3.1/all?fields=name,cca3,flags,region,population,capital';
 
   
+
+   const handleMinPopulation = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = Number(e.target.value);
+      
+      // Solo actualiza si está en el rango válido
+      if (value >= 0 && value <= 1000000000) {
+         setMinPopulation(value);
+      }
+      // Si está fuera del rango, no actualiza el estado (mantiene el valor anterior)
+   };
+
+   const handleMaxPopulation = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = Number(e.target.value);
+            
+            // Solo actualiza si está en el rango válido
+            if (value >= 0 && value <= 1000000000) {
+               setMaxPopulation(value);
+            }
+            // Si está fuera del rango, no actualiza el estado (mantiene el valor anterior)
+   }
 
    const requestCountriesList = async () => {
       setLoading(true);
@@ -45,19 +66,27 @@ export const CountryCardsDisplay = () => {
     setSelectedRegion(value);
     
     if (value === "All") {
-      setCurrentCountriesList(allCountries.filter(e => e.name.common.includes(inputSearch.trim())));
+      setCurrentCountriesList(allCountries.filter(e => e.name.common.includes(inputSearch.trim())).filter(e => {
+         return e.population > minPopulation && e.population < maxPopulation
+      }));
     } else {
       setCurrentCountriesList(
-        allCountries.filter(country => country.region === value && country.name.common.includes(inputSearch.trim()))
+        allCountries.filter(country => country.region === value && country.name.common.includes(inputSearch.trim())).filter(e => {
+         return e.population > minPopulation && e.population < maxPopulation
+      })
       );
     }
   };
 
    const onClickSearch = () => {
       if(inputSearch.trim() == "" && selectedRegion === "All"){
-         setCurrentCountriesList(allCountries)
+         setCurrentCountriesList(allCountries.filter(e => {
+         return e.population > minPopulation && e.population < maxPopulation
+      }))
       }else {
-         setCurrentCountriesList(allCountries?.filter(e => e.name.common.includes(inputSearch.trim()) && e.region == selectedRegion))
+         setCurrentCountriesList(allCountries?.filter(e => e.name.common.includes(inputSearch.trim()) && (selectedRegion == "All"?true:e.region == selectedRegion)).filter(e => {
+         return e.population > minPopulation && e.population < maxPopulation
+      }))
       }
       
    }
@@ -69,6 +98,7 @@ export const CountryCardsDisplay = () => {
       }, []); // Solo una vez al montar
 
    useEffect(() => {
+      
          setCurrentCountriesList(allCountries)
          /* console.log(cur) */ // Actualizar cuando allCountries cambie
       }, [allCountries]); 
@@ -108,6 +138,32 @@ export const CountryCardsDisplay = () => {
                title='a'/>
             <button className='text-white border-white border py-0.5 px-2 rounded-lg' onClick={() => onClickSearch()}>Search</button>
          </label>
+         <div className="flex gap-2 items-center w-">
+            <label className='flex flex-col gap-2'>
+               <p>Min Poblacion:</p>
+               <input 
+                  type="number" 
+                  value={minPopulation} 
+                  onChange={e => handleMinPopulation(e)}
+                  min={0}
+                  max={1000000000}
+                  placeholder='Min poblacion'
+               />
+            </label>
+            <label className='flex flex-col gap-2'>
+               <p>Max Poblacion:</p>
+               <input 
+                  type="number" 
+                  value={maxPopulation} 
+                  onChange={e => handleMaxPopulation(e)}
+                  min={0}
+                  max={1000000000}
+                  placeholder='Min poblacion'
+               />
+            </label>
+            
+             
+         </div>
       </div>
       <div className="flex flex-wrap gap-4 justify-center ">
          {loading ? (
