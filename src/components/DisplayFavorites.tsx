@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { CountryCard } from './CountryCard';
 import { useModalCountry } from '@/hooks';
 import { CountryModal } from './CountryModal';
+import { getFavorites } from '@/lib/utils/localStorage';
 
 export const DisplayFavorites = () => {
 
@@ -12,7 +13,7 @@ export const DisplayFavorites = () => {
    const {currentModalCountry, isModalOpen, setCurrentModalCountry, setIsModalOpen} = useModalCountry()
 
    useEffect(() => {
-      setFavorites(JSON.parse(localStorage.getItem('favorites') || '[]'))
+      setFavorites(getFavorites())
       return () => {
          
       };
