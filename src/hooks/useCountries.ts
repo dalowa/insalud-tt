@@ -4,9 +4,8 @@ import { useEffect, useState } from 'react';
 export const useCountries = () => {
    const [allCountries, setAllCountries] = useState<Country[]>([]);
    const [loading, setLoading] = useState(true);
-
    useEffect( () => {
-      const requestCountriesList = async () => {  // Función DENTRO
+      const requestCountriesList = async () => {
          try {
             setLoading(true);
             const URL_COUNTRIES_API = 'https://restcountries.com/v3.1/all?fields=name,cca3,flags,region,population,capital';
@@ -18,7 +17,6 @@ export const useCountries = () => {
             setLoading(false);
          }
       };
-
       requestCountriesList();
    },[])
    return { allCountries, loading };
