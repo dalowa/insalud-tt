@@ -8,7 +8,8 @@ interface SearchInputProps {
 
 export const SearchInput = ({inputSearch, setInputSearch}:SearchInputProps) => {
   return (
-      <label className='flex bg-black w-full justify-center px-5 py-2 gap-2 lg:w-[30%]'>
+      <label className='flex bg-black w-full justify-center flex-col px-5 py-2 gap-2 lg:w-[30%]'>
+         <p className='text-white'>Nombre del pais</p>
          <Input 
             type="text" 
             className='bg-white text-black ' 
