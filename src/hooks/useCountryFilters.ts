@@ -9,7 +9,7 @@ export const useCountryFilters = (countries: Country[]) => {
 
   const getFilteredCountries = () => {
     return countries
-   .filter(c => c.name.common.toLowerCase().includes(inputSearch.toLowerCase().trim()))
+   .filter(c => c.name.common.includes(inputSearch.trim()))
    .filter(c => selectedRegion === "All" || c.region === selectedRegion)
    .filter(c => c.population >= minPopulation && c.population <= maxPopulation)
   };
