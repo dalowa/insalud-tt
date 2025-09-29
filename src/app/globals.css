@@ -120,3 +120,22 @@
     @apply bg-background text-foreground;
   }
 }
+
+.animate-scale-in {
+  animation: scale-in 0.8s ease-out;
+}
+
+@keyframes scale-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(0.85);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
