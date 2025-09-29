@@ -30,7 +30,7 @@ export const CountryCardsDisplay = () => {
             setMaxPopulation={props.setMaxPopulation}
             setMinPopulation={props.setMinPopulation}
          />
-         <div className="flex flex-wrap gap-4 justify-center ">
+         <div className="flex flex-wrap gap-4 justify-center max-w-[1200px] xl:mx-auto">
             {loading ? (
                <div className='font-bold'>CARGANDO...</div>
             ) : currentCountriesList?.length === 0 ? (

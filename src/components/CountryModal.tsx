@@ -34,7 +34,7 @@ export const CountryModal = ({country, setIsModalOpen}: CountryModalProps) => {
           className="absolute top-3 left-3 text-gray-400 hover:text-yellow-300 text-2xl font-bold focus:outline-none"
           onClick={addToFavorites}
           >Fav</button>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center py-10">
           <Image
             src={country.flags.png ?? country.flags.svg}
             alt={`Country flag of ${country.name.common}`}

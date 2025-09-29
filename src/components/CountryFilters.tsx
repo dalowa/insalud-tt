@@ -29,7 +29,7 @@ export const CountryFilters = ({
         <SearchInput inputSearch={inputSearch} setInputSearch={setInputSearch} />
         <PopulationRange minPopulation={minPopulation} maxPopulation={maxPopulation} setMinPopulation={setMinPopulation} setMaxPopulation={setMaxPopulation} />
         <RegionSelect setSelectedRegion={setSelectedRegion} selectedRegion={selectedRegion} />
-        <button type="button" onClick={() => onSearch()} className='text-3xl bg-white font-bold rounded-lg w-40 px-4 py-2' title='Search'>SEARCH</button>
+        <button type="button" onClick={() => onSearch()} className='text-3xl bg-white font-bold rounded-lg w-40 px-4 py-2' title='Search'>BUSCAR</button>
       </div>
   );
 };
