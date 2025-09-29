@@ -8,19 +8,38 @@ import { CountryFilters } from './CountryFilters'
 import { CountryModal } from './CountryModal'
 
 export const CountryCardsDisplay = () => {
-  const [currentCountriesList, setCurrentCountriesList] = useState<Country[] | undefined >(undefined)
   const { allCountries, loading } = useCountries()
   const {...props} = useCountryFilters(allCountries)
   const {currentModalCountry, isModalOpen, setCurrentModalCountry, setIsModalOpen} = useModalCountry()
+  const [currentPage, setCurrentPage] = useState(1) 
 
+const itemsPerPage = 8;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentItems = props.filteredCountries.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(props.filteredCountries.length / itemsPerPage);
+
+  // Resetear página cuando cambian los filtros
   useEffect(() => {
-   setCurrentCountriesList(allCountries)
-  },[allCountries])
+    setCurrentPage(1);
+  }, [props.filteredCountries.length]);
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prev => prev - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(prev => prev + 1);
+    }
+  };
+
 
   return (
       <>
          <CountryFilters 
-            onSearch={() => setCurrentCountriesList(props.filteredCountries)}
             inputSearch={props.inputSearch}
             setInputSearch={props.setInputSearch}
             selectedRegion={props.selectedRegion}
@@ -33,17 +52,27 @@ export const CountryCardsDisplay = () => {
          <div className="flex flex-wrap gap-4 justify-center max-w-[1200px] xl:mx-auto">
             {loading ? (
                <div className='font-bold'>CARGANDO...</div>
-            ) : currentCountriesList?.length === 0 ? (
+            ) : props.filteredCountries?.length === 0 ? (
                <div className='font-bold'>NO HAY RESULTADOS</div>
             ) : (
-               currentCountriesList?.map((co, i) => (
+               currentItems.map((co, i) => (
                   <CountryCard 
                      setCurrentModalCountry={setCurrentModalCountry}
                      setModalIsOpen={setIsModalOpen}  
-                     country={co} 
+                     country={co}
                      key={`${i}+${co.name.common}`} />
                ))
             )}
+         </div>
+         <div className=' flex justify-center gap-2'>
+            <button 
+            type='button' 
+            onClick={() => handlePrevious()}
+            className='border cursor-pointer hover:bg-black hover:text-white border-black py-2 px-3 w-40 text-center rounded-2xl font-bold'>Previo</button>
+            <button 
+            type='button' 
+            onClick={() => handleNext()}
+            className='border cursor-pointer hover:bg-black hover:text-white border-black py-2 px-3 w-40 text-center rounded-2xl font-bold'>Siguiente</button>
          </div>
          {isModalOpen ? (<CountryModal setIsModalOpen={setIsModalOpen} country={currentModalCountry as Country} />):<></>}
 
