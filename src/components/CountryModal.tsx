@@ -1,6 +1,7 @@
+import { favoriteService } from '@/services/favoriteService'
 import { Country } from '@/types/countriesAPI-type'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface CountryModalProps {
   country:  Country
@@ -8,16 +9,21 @@ interface CountryModalProps {
 }
 
 export const CountryModal = ({country, setIsModalOpen}: CountryModalProps) => {
+const [isFavorite, setIsFavorite] = useState(false);
 
+  useEffect(() => {
+    setIsFavorite(favoriteService.isFavorite(country.cca3));
+  }, [country.cca3]);
 
-  const addToFavorites = () => {
-
-  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-  if (!favorites.some((fav: Country) => fav.cca3 === country.cca3)) {
-    favorites.push(country);
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }
-};
+  const handleToggleFavorite = () => {
+    if (isFavorite) {
+      favoriteService.removeFromFavorites(country.cca3);
+      setIsFavorite(false);
+    } else {
+      favoriteService.addToFavorites(country);
+      setIsFavorite(true);
+    }
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/35">
@@ -25,15 +31,16 @@ export const CountryModal = ({country, setIsModalOpen}: CountryModalProps) => {
         <button
           type='button'
           onClick={() => setIsModalOpen(false)}
-          className="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-2xl font-bold focus:outline-none"
+          className="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-3xl font-bold focus:outline-none"
           aria-label="Cerrar"
-        >X
+        >{`X`}
         </button>
         <button 
-          type='button'
-          className="absolute top-3 left-3 text-gray-400 hover:text-yellow-300 text-2xl font-bold focus:outline-none"
-          onClick={addToFavorites}
-          >Fav</button>
+          onClick={handleToggleFavorite}
+          className={`absolute top-3 left-3 text-4xl ${isFavorite ? 'text-yellow-500' : 'text-gray-400'}`}
+        >
+          {isFavorite ? '★' : '☆'}
+        </button>
         <div className="flex flex-col items-center py-10">
           <Image
             src={country.flags.png ?? country.flags.svg}
