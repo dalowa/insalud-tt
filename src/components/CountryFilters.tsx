@@ -11,11 +11,9 @@ interface CountryFiltersProps {
   setMinPopulation: (value: number) => void;
   maxPopulation: number;
   setMaxPopulation: (value: number) => void;
-  onSearch: () => void;
 }
 
 export const CountryFilters = ({
-    onSearch,
     inputSearch, 
     setInputSearch, 
     selectedRegion, 
@@ -29,7 +27,7 @@ export const CountryFilters = ({
         <SearchInput inputSearch={inputSearch} setInputSearch={setInputSearch} />
         <PopulationRange minPopulation={minPopulation} maxPopulation={maxPopulation} setMinPopulation={setMinPopulation} setMaxPopulation={setMaxPopulation} />
         <RegionSelect setSelectedRegion={setSelectedRegion} selectedRegion={selectedRegion} />
-        <button type="button" onClick={() => onSearch()} className='text-3xl bg-white font-bold rounded-lg w-40 px-4 py-2' title='Search'>BUSCAR</button>
+        {/* <button type="button" onClick={() => onSearch()} className='text-3xl bg-white font-bold rounded-lg w-40 px-4 py-2' title='Search'>BUSCAR</button> */}
       </div>
   );
 };
