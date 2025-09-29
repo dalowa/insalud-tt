@@ -1,4 +1,4 @@
-import { millonesOMiles } from '@/lib/millones-o-miles'
+import { millonesOMiles } from '@/lib/millonesOMiles'
 import { Country } from '@/types/countriesAPI-type'
 import Image from 'next/image'
 import React from 'react'
@@ -7,15 +7,10 @@ interface CountryCardProps {
    country: Country
    setModalIsOpen: (b:boolean) => void
    setCurrentModalCountry: (c: Country) => void
-
 }
 
-
-
 export function CountryCard({country, setModalIsOpen, setCurrentModalCountry} : CountryCardProps) {
-
    const handleClickModal = (c: Country) => {
-      /* console.log("Click detected") */
       setModalIsOpen(true)
       setCurrentModalCountry(c)
    }
@@ -36,7 +31,6 @@ export function CountryCard({country, setModalIsOpen, setCurrentModalCountry} : 
       <h4 className="text-sm text-center px-2 md:text-base xl:text-xl">{`${country.region}`}</h4>
       <h5 className="text-sm text-center px-2 md:text-base xl:text-xl">{`${millonesOMiles(country.population)}`}</h5>
       </div>
-
    </div>
   )
 };
