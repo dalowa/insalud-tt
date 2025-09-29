@@ -17,7 +17,7 @@ export const DisplayFavorites = () => {
       return () => {
          
       };
-   }, []);
+   }, [isModalOpen]);
 
   return (
    <>
