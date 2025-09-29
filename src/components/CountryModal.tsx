@@ -21,7 +21,7 @@ export const CountryModal = ({country, setIsModalOpen}: CountryModalProps) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/35">
-      <div className="relative bg-white rounded-2xl shadow-2xl w-80 max-w-sm p-6 text-gray-800">
+      <div className="relative bg-white rounded-2xl shadow-2xl w-80 max-w-sm p-6 text-gray-800 animate-scale-in">
         <button
           type='button'
           onClick={() => setIsModalOpen(false)}
