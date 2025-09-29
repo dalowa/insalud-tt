@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Country } from '@/types/countriesAPI-type';
+import { countryService } from '@/services/countryService';
 
 export const useCountryFilters = (countries: Country[]) => {
   const [inputSearch, setInputSearch] = useState("");
@@ -8,10 +9,13 @@ export const useCountryFilters = (countries: Country[]) => {
   const [maxPopulation, setMaxPopulation] = useState(1000000000);
 
   const getFilteredCountries = () => {
-    return countries
-   .filter(c => c.name.common.includes(inputSearch.trim()))
-   .filter(c => selectedRegion === "All" || c.region === selectedRegion)
-   .filter(c => c.population >= minPopulation && c.population <= maxPopulation)
+    let filtered = countries;
+    if (inputSearch.trim()) {
+      filtered = countryService.searchCountries(filtered, inputSearch);
+    }
+    filtered = countryService.filterByRegion(filtered, selectedRegion);
+    filtered = countryService.filterByPopulation(filtered, minPopulation, maxPopulation);
+    return filtered;
   };
 
   return {
