@@ -25,11 +25,11 @@ export const CountryFilters = ({
     maxPopulation, 
     setMaxPopulation}: CountryFiltersProps) => {
   return (
-      <div className='flex flex-col items-center'>
+      <div className='flex flex-col items-center lg:px-[10vw] gap-3 bg-black py-5 sm:flex-row sm:justify-center flex-wrap'>
         <SearchInput inputSearch={inputSearch} setInputSearch={setInputSearch} />
         <PopulationRange minPopulation={minPopulation} maxPopulation={maxPopulation} setMinPopulation={setMinPopulation} setMaxPopulation={setMaxPopulation} />
         <RegionSelect setSelectedRegion={setSelectedRegion} selectedRegion={selectedRegion} />
-        <button type="button" onClick={() => onSearch()} className='text-3xl bg-black text-white rounded-lg w-40 px-4 py-2' title='Search'>SEARCH</button>
+        <button type="button" onClick={() => onSearch()} className='text-3xl bg-white font-bold rounded-lg w-40 px-4 py-2' title='Search'>SEARCH</button>
       </div>
   );
 };
