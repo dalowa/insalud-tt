@@ -1,42 +1,17 @@
 'use client'
 
 import { Country } from '@/types/countriesAPI-type'
-import React, { useEffect, useState } from 'react'
 import { CountryCard } from './CountryCard'
 import { useCountries, useCountryFilters, useModalCountry } from '@/hooks'
 import { CountryFilters } from './CountryFilters'
 import { CountryModal } from './CountryModal'
+import { usePagination } from '@/hooks/usePagination'
 
 export const CountryCardsDisplay = () => {
   const { allCountries, loading } = useCountries()
   const {...props} = useCountryFilters(allCountries)
   const {currentModalCountry, isModalOpen, setCurrentModalCountry, setIsModalOpen} = useModalCountry()
-  const [currentPage, setCurrentPage] = useState(1) 
-
-const itemsPerPage = 8;
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentItems = props.filteredCountries.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(props.filteredCountries.length / itemsPerPage);
-
-  // Resetear página cuando cambian los filtros
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [props.filteredCountries.length]);
-
-  const handlePrevious = () => {
-    if (currentPage > 1) {
-      setCurrentPage(prev => prev - 1);
-    }
-  };
-
-  const handleNext = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(prev => prev + 1);
-    }
-  };
-
-
+  const {currentItems, handleNext, handlePrevious} = usePagination(8,props.filteredCountries)
   return (
       <>
          <CountryFilters 
