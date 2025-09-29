@@ -2,10 +2,9 @@
 
 import { Country } from '@/types/countriesAPI-type'
 import { CountryCard } from './CountryCard'
-import { useCountries, useCountryFilters, useModalCountry } from '@/hooks'
+import { useCountries, useCountryFilters, useModalCountry,usePagination } from '@/hooks'
 import { CountryFilters } from './CountryFilters'
 import { CountryModal } from './CountryModal'
-import { usePagination } from '@/hooks/usePagination'
 
 export const CountryCardsDisplay = () => {
   const { allCountries, loading } = useCountries()
