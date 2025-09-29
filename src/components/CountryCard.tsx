@@ -5,12 +5,25 @@ import React from 'react'
 
 interface CountryCardProps {
    country: Country
+   setModalIsOpen: (b:boolean) => void
+   setCurrentModalCountry: (c: Country) => void
+
 }
 
-export function CountryCard({country} : CountryCardProps) {
+
+
+export function CountryCard({country, setModalIsOpen, setCurrentModalCountry} : CountryCardProps) {
+
+   const handleClickModal = (c: Country) => {
+      console.log("Click detected")
+      
+      setModalIsOpen(true)
+      setCurrentModalCountry(c)
+   }
   return (
     <div
-      className={`border border-black w-40 h-70 flex flex-col gap-3 bg-gray-900/50 rounded-2xl`}
+      className={`border border-black w-40 h-70 flex flex-col gap-3 bg-gray-300 rounded-2xl`}
+      onClick={() => handleClickModal(country)}
    >
       <h3 className="rounded-t-2xl font-bold text-center bg-black text-white py-2 leading-4 px-0.5">{country.name.common}</h3>
       <Image 
