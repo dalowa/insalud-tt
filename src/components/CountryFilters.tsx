@@ -23,7 +23,7 @@ export const CountryFilters = ({
     maxPopulation, 
     setMaxPopulation}: CountryFiltersProps) => {
   return (
-      <div className='flex flex-col items-center lg:px-[10vw] gap-3 bg-black py-5 sm:flex-row sm:justify-center flex-wrap'>
+      <div className='flex flex-col items-center gap-3 bg-gray-200 border-gray-500 rounded-2xl border xl:max-w-[70rem] md:max-w-[27.5rem] max-w-[20rem] w-full mx-auto py-5 sm:flex-row sm:justify-center flex-wrap'>
         <SearchInput inputSearch={inputSearch} setInputSearch={setInputSearch} />
         <PopulationRange minPopulation={minPopulation} maxPopulation={maxPopulation} setMinPopulation={setMinPopulation} setMaxPopulation={setMaxPopulation} />
         <RegionSelect setSelectedRegion={setSelectedRegion} selectedRegion={selectedRegion} />

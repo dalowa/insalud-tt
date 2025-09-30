@@ -10,7 +10,7 @@ export const CountryCardsDisplay = () => {
   const { allCountries, loading } = useCountries()
   const {...props} = useCountryFilters(allCountries)
   const {currentModalCountry, isModalOpen, setCurrentModalCountry, setIsModalOpen} = useModalCountry()
-  const {currentItems, handleNext, handlePrevious} = usePagination(8,props.filteredCountries)
+  const {currentItems, handleNext, handlePrevious, currentPage, totalPages} = usePagination(8,props.filteredCountries)
   return (
       <>
          <CountryFilters 
@@ -23,7 +23,19 @@ export const CountryCardsDisplay = () => {
             setMaxPopulation={props.setMaxPopulation}
             setMinPopulation={props.setMinPopulation}
          />
-         <div className="flex flex-wrap gap-4 justify-center max-w-[1200px] xl:mx-auto">
+         <div className=' flex justify-center gap-2'>
+            <button 
+            type='button' 
+            onClick={() => handlePrevious()}
+            className='border cursor-pointer hover:bg-black hover:text-white border-black py-2 px-3 w-28 text-center rounded-2xl font-bold'>Previo</button>
+
+            <div className='border cursor-pointer border-white py-2 px-3 w-20 text-center rounded-2xl font-bold'>{`Page  ${currentPage}/${totalPages}`}</div>
+            <button 
+            type='button' 
+            onClick={() => handleNext()}
+            className='border cursor-pointer hover:bg-black hover:text-white border-black py-2 px-3 w-28 text-center rounded-2xl font-bold'>Siguiente</button>
+         </div>
+         <div className="flex flex-wrap gap-4 px-5 justify-center max-w-[1200px] xl:mx-auto">
             {loading ? (
                <div className='font-bold'>CARGANDO...</div>
             ) : props.filteredCountries?.length === 0 ? (
@@ -38,16 +50,7 @@ export const CountryCardsDisplay = () => {
                ))
             )}
          </div>
-         <div className=' flex justify-center gap-2'>
-            <button 
-            type='button' 
-            onClick={() => handlePrevious()}
-            className='border cursor-pointer hover:bg-black hover:text-white border-black py-2 px-3 w-40 text-center rounded-2xl font-bold'>Previo</button>
-            <button 
-            type='button' 
-            onClick={() => handleNext()}
-            className='border cursor-pointer hover:bg-black hover:text-white border-black py-2 px-3 w-40 text-center rounded-2xl font-bold'>Siguiente</button>
-         </div>
+         
          {isModalOpen ? (<CountryModal setIsModalOpen={setIsModalOpen} country={currentModalCountry as Country} />):<></>}
 
          {/* <CountryModalBox 

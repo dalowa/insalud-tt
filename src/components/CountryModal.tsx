@@ -2,6 +2,8 @@ import { favoriteService } from '@/services/favoriteService'
 import { Country } from '@/types/countriesAPI-type'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
+import { IconHeart } from './icons/IconHeart'
+import { IconClose } from './icons/IconClose'
 
 interface CountryModalProps {
   country:  Country
@@ -27,19 +29,21 @@ const [isFavorite, setIsFavorite] = useState(false);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/35">
-      <div className="relative bg-white rounded-2xl shadow-2xl w-80 max-w-sm p-6 text-gray-800 animate-scale-in">
+      <div className="relative bg-white rounded-2xl shadow-2xl w-80 max-w-sm p-8 text-gray-800 animate-scale-in">
         <button
           type='button'
           onClick={() => setIsModalOpen(false)}
-          className="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-3xl font-bold focus:outline-none"
+          className="absolute top-3 right-3 text-gray-400 hover:text-black cursor-pointer text-3xl font-bold focus:outline-none"
           aria-label="Cerrar"
-        >{`X`}
-        </button>
-        <button 
-          onClick={handleToggleFavorite}
-          className={`absolute top-3 left-3 text-4xl ${isFavorite ? 'text-yellow-500' : 'text-gray-400'}`}
         >
-          {isFavorite ? '★' : '☆'}
+          <IconClose className='w-10 h-10'/>
+        </button>
+        <button
+          title='favorite button' 
+          onClick={handleToggleFavorite}
+          className={`absolute top-3 left-3 ${isFavorite ? 'text-yellow-500' : 'text-gray-400'}`}
+        >
+          <IconHeart className={`absolute top-3 left-3 w-8 h-8 hover:text-red-500 cursor-pointer text-4xl ${isFavorite ? 'text-red-500' : 'text-gray-400'}`} />
         </button>
         <div className="flex flex-col items-center py-10">
           <Image

@@ -9,10 +9,10 @@ interface RegionSelectProps {
 export const RegionSelect = ({selectedRegion, setSelectedRegion}:RegionSelectProps) => {
 
   return (
-    <label className='bg-black w-full lg:w-[30%] flex justify-center mb-4 sm:w-[45%] flex-col items-center' >
-         <div className='text-white'>Selecciona una Region:</div>
+    <label className='w-full flex justify-center mb-4 flex-col px-5 xl:w-[30%]' >
+         <div className='text-start'>Selecciona una Region:</div>
          <Select onValueChange={e => setSelectedRegion(e)} value={selectedRegion}>
-            <SelectTrigger className="w-[180px] bg-white">
+            <SelectTrigger className="w-full bg-gray-200 text-black border border-black ">
                <SelectValue placeholder="Select a region" />
             </SelectTrigger>
             <SelectContent>

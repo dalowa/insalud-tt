@@ -1,4 +1,5 @@
 import React from 'react'
+import { Input } from './ui/input';
 
 interface PopulationRangeProps {
   minPopulation: number;
@@ -9,11 +10,11 @@ interface PopulationRangeProps {
 
 export const PopulationRange = ({minPopulation, maxPopulation, setMaxPopulation, setMinPopulation}:PopulationRangeProps) => {
   return (
-      <div className="flex gap-2 items-center bg-black w-full lg:w-[30%] text-white justify-center mb-4 sm:w-[45%] ">
-            <label className='flex flex-col gap-2'>
+      <div className="flex gap-2 items-center w-full flex-col xl:flex-row justify-center mb-4 px-5 xl:w-[30%]">
+            <label className='flex flex-col gap-2 w-[100%]'>
                <p>Min Poblacion:</p>
-               <input
-                  className='bg-white text-black rounded-2xl px-2 py-1'
+               <Input
+                  className='px-2 py-1 bg-gray-200 text-black border border-black '
                   type="number" 
                   value={minPopulation} 
                   onChange={e => setMinPopulation(Number(e.target.value))}
@@ -22,10 +23,10 @@ export const PopulationRange = ({minPopulation, maxPopulation, setMaxPopulation,
                   placeholder='Min poblacion'
                />
             </label>
-            <label className='flex flex-col gap-2'>
+            <label className='flex flex-col gap-2 w-[100%]'>
                <p>Max Poblacion:</p>
-               <input
-                  className='bg-white text-black rounded-2xl px-2 py-1'
+               <Input
+                  className='px-2 py-1 bg-gray-200 text-black border border-black '
                   type="number" 
                   value={maxPopulation} 
                   onChange={e => setMaxPopulation(Number(e.target.value))}

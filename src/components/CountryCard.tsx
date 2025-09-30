@@ -1,4 +1,4 @@
-import { millonesOMiles } from '@/lib/millonesOMiles'
+import { formatPopulation } from '@/lib/utils/format'
 import { Country } from '@/types/countriesAPI-type'
 import Image from 'next/image'
 import React from 'react'
@@ -16,20 +16,22 @@ export function CountryCard({country, setModalIsOpen, setCurrentModalCountry} : 
    }
   return (
     <div
-      className={`border border-black w-40 h-70 md:w-52 xl:w-64 xl:h-[28rem] flex flex-col gap-3 bg-gray-400/50 rounded-2xl cursor-pointer`}
+      className={`border border-gray-400 relative w-full md:w-52 xl:w-80 px-5 py-8 justify-between flex flex-col items-start rounded-lg cursor-pointer`}
       onClick={() => handleClickModal(country)}
    >
-      <h3 className="rounded-t-2xl font-bold text-center bg-black text-white py-2 leading-4 px-0.5 xl:py-5 xl:text-2xl">{country.name.common}</h3>
-      <Image 
-      src={country.flags.png ?? country.flags.svg}
-      alt={`Country flag of ${country.name.common}`}
-      width={250}
-      height={0o0}
-      className="px-2"
-      />
-      <div className="flex flex-col justify-evenly h-full">
-      <h4 className="text-sm text-center px-2 md:text-base xl:text-xl">{`${country.region}`}</h4>
-      <h5 className="text-sm text-center px-2 md:text-base xl:text-xl">{`${millonesOMiles(country.population)}`}</h5>
+      
+      <div className='w-20 h-12 relative overflow-hidden'>
+         <Image 
+            src={country.flags.png ?? country.flags.svg}
+            alt={`Country flag of ${country.name.common}`}
+            fill
+            className=""
+         />
+      </div>
+      <div className="justify-evenly w-full [&>p]:my-2">
+         <p className="font-bold text-start text-xl tracking-wider">{country.name.common}</p>
+         <p className="text-sm text-start md:text-base xl:text-xl px-2 bg-gray-300 rounded-lg inline">{`${country.region}`}</p>
+         <p className="text-sm text-start md:text-base xl:text-xl">{`Aprox. population: ${formatPopulation(country.population)}`}</p>
       </div>
    </div>
   )
