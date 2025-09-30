@@ -26,6 +26,8 @@ export const usePagination = (itemsPerPage: number, countries:Country[]) => {
     return {
       currentItems,
       handlePrevious,
-      handleNext
+      handleNext,
+      currentPage,
+      totalPages
     }
 }
