@@ -2,14 +2,13 @@
 import { useCountriesStore } from '@/store';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../ui';
 
-
 export const RegionSelect = () => {
    const { selectedRegion, setSelectedRegion } = useCountriesStore();
   return (
     <label className='flex justify-center flex-col w-[30%]' >
          <Select onValueChange={e => setSelectedRegion(e)} value={selectedRegion}>
             <SelectTrigger className="w-full bg-white text-black border border-gray-300 shadow-lg">
-               <SelectValue placeholder="Region" />
+               <SelectValue placeholder="Region"  />
             </SelectTrigger>
             <SelectContent>
                <SelectGroup>
@@ -21,7 +20,6 @@ export const RegionSelect = () => {
                   <SelectItem value="Europe">Europe</SelectItem>
                   <SelectItem value="Oceania">Oceania</SelectItem>
                   <SelectItem value="Antarctic">Antarctic</SelectItem>
-
                </SelectGroup>
             </SelectContent>
          </Select>
