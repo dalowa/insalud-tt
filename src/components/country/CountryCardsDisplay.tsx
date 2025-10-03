@@ -12,7 +12,7 @@ export const CountryCardsDisplay = () => {
   return (
       <>
          
-         <div className="flex flex-wrap max-w-[var(--max-w-container)] gap-4 px-5 justify-center xl:mx-auto">
+         <div className="flex flex-wrap max-w-[var(--max-w-container)] gap-4 px-5 justify-center">
             {loading ? (
                <div className='font-bold'>CARGANDO...</div>
             ) : props.filteredCountries?.length === 0 ? (
