@@ -20,8 +20,11 @@ export const countryService = {
   },
 
   filterByRegion: (countries: Country[], region: string): Country[] => {
-    if (region === "All") return countries;
-    return countries.filter(country => country.region === region);
+    /* console.log(`Filter region being used and value is ${region}`) */
+    if (region == "All" || region == "") return countries;
+    else{
+      return countries.filter(country => country.region === region);
+    }
   },
 
   filterByPopulation: (countries: Country[], min: number, max: number): Country[] => {
