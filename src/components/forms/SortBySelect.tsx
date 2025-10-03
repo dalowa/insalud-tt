@@ -8,7 +8,7 @@ export const SortBySelect = () => {
    return (
          <label className='flex justify-center flex-col w-[30%]' >
             <Select onValueChange={e => setOrderByCode(Number(e))}>
-               <SelectTrigger className="w-full bg-white text-black border border-white ">
+               <SelectTrigger className="w-full bg-white text-black border border-gray-300 shadow-lg ">
                   <SelectValue className='text-black placeholder:text-black placeholder:text-4xl' placeholder="Order by" />
                </SelectTrigger>
                <SelectContent>
