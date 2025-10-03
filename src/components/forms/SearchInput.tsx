@@ -1,22 +1,20 @@
-import React from 'react'
-import { Input } from './ui/input'
+'use client'
 
-interface SearchInputProps {
-   inputSearch: string;
-   setInputSearch: (value: string) => void;
-}
+import { useCountriesStore } from '@/store'
+import { IconSearch } from '../icons';
 
-export const SearchInput = ({inputSearch, setInputSearch}:SearchInputProps) => {
-  return (
-      <label className='flex w-full justify-center flex-col px-5 py-2 gap-2 xl:w-[30%]'>
-         <p className='text-black'>Nombre del pais:</p>
-         <Input 
-            type="text" 
-            className='bg-gray-200 text-black border border-black ' 
-            value={inputSearch} 
-            onChange={e => setInputSearch(e.target.value)} 
-            /* onKeyDown={e => e.key === 'Enter' && onClickSearch()} */
-            title='Search for country'/>
-      </label>
-  )
-}
+export const SearchInput = () => {
+   const { inputSearch, setInputSearch } = useCountriesStore()
+   return (
+         <label className='flex w-[91%] sm:w-[35%] lg:w-[45%] rounded-lg bg-white text-gray-500 border border-black justify-center py-1 items-center pr-1 pl-3 gap-2'>
+            <IconSearch className='h-5 w-5 text-red-400' />
+            <input 
+               type="text" 
+               placeholder='Search for a country...'
+               className=' text-black w-full placeholder:text-gray-500 outline-none py-1' 
+               value={inputSearch} 
+               onChange={e => setInputSearch(e.target.value)} 
+               title='Search for country'/>
+         </label>
+   )
+};

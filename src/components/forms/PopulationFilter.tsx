@@ -1,40 +1,54 @@
-import React from 'react'
-import { Input } from './ui/input';
+'use client'
 
-interface PopulationRangeProps {
-  minPopulation: number;
-  maxPopulation: number;
-  setMinPopulation: (value: number) => void;
-  setMaxPopulation: (value: number) => void;
-}
+import { useCountriesStore } from '@/store';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../ui';
 
-export const PopulationRange = ({minPopulation, maxPopulation, setMaxPopulation, setMinPopulation}:PopulationRangeProps) => {
-  return (
-      <div className="flex gap-2 items-center w-full flex-col xl:flex-row justify-center mb-4 px-5 xl:w-[30%]">
-            <label className='flex flex-col gap-2 w-[100%]'>
-               <p>Min Poblacion:</p>
-               <Input
-                  className='px-2 py-1 bg-gray-200 text-black border border-black '
-                  type="number" 
-                  value={minPopulation} 
-                  onChange={e => setMinPopulation(Number(e.target.value))}
-                  min={0}
-                  max={1000000000}
-                  placeholder='Min poblacion'
-               />
-            </label>
-            <label className='flex flex-col gap-2 w-[100%]'>
-               <p>Max Poblacion:</p>
-               <Input
-                  className='px-2 py-1 bg-gray-200 text-black border border-black '
-                  type="number" 
-                  value={maxPopulation} 
-                  onChange={e => setMaxPopulation(Number(e.target.value))}
-                  min={0}
-                  max={1000000000}
-                  placeholder='Min poblacion'
-               />
-            </label>   
-        </div>
-  )
-}
+export const PopulationFilter = () => {
+   const { setMinPopulation, setMaxPopulation } = useCountriesStore()
+
+
+   const handlePopulationChange = (value: number) => {
+      switch (value) {
+         case 0:
+            setMinPopulation(0);
+            setMaxPopulation(1000000000);
+            break;
+         case 1:
+            setMinPopulation(0);
+            setMaxPopulation(1000000);
+            break;
+         case 2:
+            setMinPopulation(1000000);
+            setMaxPopulation(10000000);
+            break;
+         case 3:
+            setMinPopulation(50000000);
+            setMaxPopulation(100000000);
+            break;
+         case 4:
+            setMinPopulation(100000000);
+            setMaxPopulation(1000000000);
+            break;
+      }
+   }
+
+   return (
+         <label className='flex justify-center flex-col w-[30%]' >
+            <Select onValueChange={e => handlePopulationChange(Number(e))}>
+               <SelectTrigger className="w-full bg-white text-black border border-black ">
+                  <SelectValue className='text-black placeholder:text-black placeholder:text-4xl' placeholder="Population" />
+               </SelectTrigger>
+               <SelectContent>
+                  <SelectGroup>
+                     <SelectLabel>Population</SelectLabel>
+                     <SelectItem value="0">All countries</SelectItem>
+                     <SelectItem value="1">Less than 1 million</SelectItem>
+                     <SelectItem value="2">1 – 10 million</SelectItem>
+                     <SelectItem value="3">50 – 100 million</SelectItem>
+                     <SelectItem value="4">More than 100 million</SelectItem>
+                  </SelectGroup>
+               </SelectContent>
+            </Select>
+         </label>
+   )
+};

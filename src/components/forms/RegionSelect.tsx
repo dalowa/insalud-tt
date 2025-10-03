@@ -1,19 +1,15 @@
-import React from 'react'
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from './ui/select';
+'use client'
+import { useCountriesStore } from '@/store';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../ui';
 
-interface RegionSelectProps {
-   selectedRegion: string;
-   setSelectedRegion: (value: string) => void;
-}
 
-export const RegionSelect = ({selectedRegion, setSelectedRegion}:RegionSelectProps) => {
-
+export const RegionSelect = () => {
+   const { selectedRegion, setSelectedRegion } = useCountriesStore();
   return (
-    <label className='w-full flex justify-center mb-4 flex-col px-5 xl:w-[30%]' >
-         <div className='text-start'>Selecciona una Region:</div>
+    <label className='flex justify-center flex-col w-[30%]' >
          <Select onValueChange={e => setSelectedRegion(e)} value={selectedRegion}>
-            <SelectTrigger className="w-full bg-gray-200 text-black border border-black ">
-               <SelectValue placeholder="Select a region" />
+            <SelectTrigger className="w-full bg-white text-black border border-black ">
+               <SelectValue placeholder="Region" />
             </SelectTrigger>
             <SelectContent>
                <SelectGroup>
