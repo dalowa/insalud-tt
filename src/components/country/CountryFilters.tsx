@@ -9,8 +9,8 @@ export const CountryFilters = () => {
           <RegionSelect />
           <SortBySelect />
         </div>
-        <div className='w-full flex justify-center sm:justify-end'>
-          <button type='button' className=' border-2 border-red-400 text-red-400 px-4 py-2 rounded-lg font-black'>Clean filters</button>
+        <div className=' w-full flex justify-center sm:justify-end'>
+          <button type='button' className=' border border-red-400 shadow-lg shadow-gray-400 bg-red-400 text-white px-4 py-2 rounded-xl font-black'>Clean filters</button>
         </div>
       </div>
   );
