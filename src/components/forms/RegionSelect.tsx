@@ -8,7 +8,7 @@ export const RegionSelect = () => {
   return (
     <label className='flex justify-center flex-col w-[30%]' >
          <Select onValueChange={e => setSelectedRegion(e)} value={selectedRegion}>
-            <SelectTrigger className="w-full bg-white text-black border border-black ">
+            <SelectTrigger className="w-full bg-white border-white text-black border">
                <SelectValue placeholder="Region" />
             </SelectTrigger>
             <SelectContent>

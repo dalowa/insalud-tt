@@ -35,7 +35,7 @@ export const PopulationFilter = () => {
    return (
          <label className='flex justify-center flex-col w-[30%]' >
             <Select onValueChange={e => handlePopulationChange(Number(e))}>
-               <SelectTrigger className="w-full bg-white text-black border border-black ">
+               <SelectTrigger className="w-full bg-white text-black border border-white ">
                   <SelectValue className='text-black placeholder:text-black placeholder:text-4xl' placeholder="Population" />
                </SelectTrigger>
                <SelectContent>
