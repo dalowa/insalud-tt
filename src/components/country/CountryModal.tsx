@@ -1,32 +1,15 @@
 'use client'
 
-import { favoriteService } from '@/services/favoriteService'
-import { Country } from '@/types/countriesAPI-type'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
 import { IconHeart,IconClose} from '../icons';
+import { useCountriesStore } from '@/store';
+import { useFavoritesStore } from '@/store/useFavoritesStore';
 
-interface CountryModalProps {
-  country:  Country
-  setIsModalOpen: (b:boolean) => void
-}
+export const CountryModal = () => {
+const { currentModalCountry, setIsModalOpen } = useCountriesStore();
+const { isFavorite, addToFavorites, removeFromFavorites } = useFavoritesStore();
 
-export const CountryModal = ({country, setIsModalOpen}: CountryModalProps) => {
-const [isFavorite, setIsFavorite] = useState(false);
 
-  useEffect(() => {
-    setIsFavorite(favoriteService.isFavorite(country.cca3));
-  }, [country.cca3]);
-
-  const handleToggleFavorite = () => {
-    if (isFavorite) {
-      favoriteService.removeFromFavorites(country.cca3);
-      setIsFavorite(false);
-    } else {
-      favoriteService.addToFavorites(country);
-      setIsFavorite(true);
-    }
-  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/35">
@@ -41,30 +24,37 @@ const [isFavorite, setIsFavorite] = useState(false);
         </button>
         <button
           title='favorite button' 
-          onClick={handleToggleFavorite}
-          className={`absolute top-3 left-3 ${isFavorite ? 'text-yellow-500' : 'text-gray-400'}`}
+          onClick={() => {
+            if (currentModalCountry) {
+              if (isFavorite(currentModalCountry.cca3)) {
+                removeFromFavorites(currentModalCountry.cca3);
+              } else {
+                addToFavorites(currentModalCountry);
+              }
+          }}}
+          className={`absolute top-3 left-3 ${isFavorite(currentModalCountry?.cca3 as string) ? 'text-yellow-500' : 'text-gray-400'}`}
         >
-          <IconHeart className={`absolute top-3 left-3 w-8 h-8 hover:text-red-500 cursor-pointer text-4xl ${isFavorite ? 'text-red-500' : 'text-gray-400'}`} />
+          <IconHeart className={`absolute top-3 left-3 w-8 h-8 hover:text-red-500 cursor-pointer text-4xl ${isFavorite(currentModalCountry?.cca3 as string) ? 'text-red-500' : 'text-gray-400'}`} />
         </button>
         <div className="flex flex-col items-center py-10">
           <Image
-            src={country.flags.png ?? country.flags.svg}
-            alt={`Country flag of ${country.name.common}`}
+            src={currentModalCountry?.flags.png ?? currentModalCountry?.flags.svg as string}
+            alt={`Country flag of ${currentModalCountry?.name.common}`}
             width={160}
             height={0o0}
             className="rounded shadow mb-4 w-auto h-auto"
           />
-          <h2 className="text-xl text-center font-bold mb-2">{country.name.official}</h2>
+          <h2 className="text-xl text-center font-bold mb-2">{currentModalCountry?.name.official}</h2>
           <div className="mb-1">
             <span className="font-semibold">Capital:</span>{" "}
-            {country.capital?.[0] || "N/A"}
+            {currentModalCountry?.capital?.[0] || "N/A"}
           </div>
           <div className="mb-1">
-            <span className="font-semibold">Región:</span> {country.region}
+            <span className="font-semibold">Región:</span> {currentModalCountry?.region}
           </div>
           <div className="mb-1">
             <span className="font-semibold">Población:</span>{" "}
-            {country.population.toLocaleString()} personas
+            {currentModalCountry?.population.toLocaleString()} personas
           </div>
         </div>
       </div>
