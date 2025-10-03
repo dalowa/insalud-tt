@@ -81,7 +81,7 @@ export const useCountriesStore = create<CountriesState>((set, get) => ({
       orderByCode 
     } = get()
     
-    let filtered = get().filteredCountries;
+    let filtered = get().allCountries;
     if (inputSearch.trim()) {
       filtered = countryService.searchCountries(filtered, inputSearch);
     }
