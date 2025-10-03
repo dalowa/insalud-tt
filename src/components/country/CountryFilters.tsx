@@ -1,33 +1,17 @@
-import { PopulationRange } from './PopulationRange';
-import { RegionSelect } from './RegionSelect';
-import { SearchInput } from './SearchInput';
+import { PopulationFilter, RegionSelect, SearchInput, SortBySelect} from '../forms';
 
-interface CountryFiltersProps {
-  inputSearch: string;
-  setInputSearch: (value: string) => void;
-  selectedRegion: string;
-  setSelectedRegion: (value: string) => void;
-  minPopulation: number;
-  setMinPopulation: (value: number) => void;
-  maxPopulation: number;
-  setMaxPopulation: (value: number) => void;
-}
-
-export const CountryFilters = ({
-    inputSearch, 
-    setInputSearch, 
-    selectedRegion, 
-    setSelectedRegion, 
-    minPopulation, 
-    setMinPopulation, 
-    maxPopulation, 
-    setMaxPopulation}: CountryFiltersProps) => {
+export const CountryFilters = () => {
   return (
-      <div className='flex flex-col items-center gap-3 bg-gray-200 border-gray-500 rounded-2xl border xl:max-w-[70rem] md:max-w-[27.5rem] max-w-[20rem] w-full mx-auto py-5 sm:flex-row sm:justify-center flex-wrap'>
-        <SearchInput inputSearch={inputSearch} setInputSearch={setInputSearch} />
-        <PopulationRange minPopulation={minPopulation} maxPopulation={maxPopulation} setMinPopulation={setMinPopulation} setMaxPopulation={setMaxPopulation} />
-        <RegionSelect setSelectedRegion={setSelectedRegion} selectedRegion={selectedRegion} />
-        {/* <button type="button" onClick={() => onSearch()} className='text-3xl bg-white font-bold rounded-lg w-40 px-4 py-2' title='Search'>BUSCAR</button> */}
+      <div className='flex flex-col max-w-[var(--max-w-container)] sm:justify-between sm:flex-row w-full  items-center gap-3 mx-auto py-5 flex-wrap'>
+        <SearchInput/>
+        <div className='flex w-full gap-1 justify-center sm:w-[62.5%] md:max-w-[450px] sm:justify-end'>
+          <PopulationFilter />
+          <RegionSelect />
+          <SortBySelect />
+        </div>
+        <div className='w-full flex justify-center sm:justify-end'>
+          <button type='button' className=' border-2 border-red-400 text-red-400 px-4 py-2 rounded-lg font-black'>Clean filters</button>
+        </div>
       </div>
   );
 };

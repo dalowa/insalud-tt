@@ -1,5 +1,5 @@
 
-import { CountryCardsDisplay } from '../components/country/CountryCardsDisplay';
+import { CountryCardsDisplay } from "@/components/country";
 
 
 

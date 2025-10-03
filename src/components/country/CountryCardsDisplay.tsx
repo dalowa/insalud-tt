@@ -1,10 +1,8 @@
 'use client'
 
 import { Country } from '@/types/countriesAPI-type'
-import { CountryCard } from './CountryCard'
+import { CountryCard, CountryModal } from '../country'
 import { useCountries, useCountryFilters, useModalCountry,usePagination } from '@/hooks'
-import { CountryFilters } from './CountryFilters'
-import { CountryModal } from './CountryModal'
 
 export const CountryCardsDisplay = () => {
   const { allCountries, loading } = useCountries()
@@ -13,29 +11,8 @@ export const CountryCardsDisplay = () => {
   const {currentItems, handleNext, handlePrevious, currentPage, totalPages} = usePagination(8,props.filteredCountries)
   return (
       <>
-         <CountryFilters 
-            inputSearch={props.inputSearch}
-            setInputSearch={props.setInputSearch}
-            selectedRegion={props.selectedRegion}
-            setSelectedRegion={props.setSelectedRegion}
-            minPopulation={props.minPopulation}
-            maxPopulation={props.maxPopulation}
-            setMaxPopulation={props.setMaxPopulation}
-            setMinPopulation={props.setMinPopulation}
-         />
-         <div className=' flex justify-center gap-2'>
-            <button 
-            type='button' 
-            onClick={() => handlePrevious()}
-            className='border cursor-pointer hover:bg-black hover:text-white border-black py-2 px-3 w-28 text-center rounded-2xl font-bold'>Previo</button>
-
-            <div className='border cursor-pointer border-white py-2 px-3 w-20 text-center rounded-2xl font-bold'>{`Page  ${currentPage}/${totalPages}`}</div>
-            <button 
-            type='button' 
-            onClick={() => handleNext()}
-            className='border cursor-pointer hover:bg-black hover:text-white border-black py-2 px-3 w-28 text-center rounded-2xl font-bold'>Siguiente</button>
-         </div>
-         <div className="flex flex-wrap gap-4 px-5 justify-center max-w-[1200px] xl:mx-auto">
+         
+         <div className="flex flex-wrap max-w-[var(--max-w-container)] gap-4 px-5 justify-center xl:mx-auto">
             {loading ? (
                <div className='font-bold'>CARGANDO...</div>
             ) : props.filteredCountries?.length === 0 ? (
@@ -50,15 +27,20 @@ export const CountryCardsDisplay = () => {
                ))
             )}
          </div>
+         <div className=' flex justify-center gap-2'>
+            <button 
+            type='button' 
+            onClick={() => handlePrevious()}
+            className='border cursor-pointer hover:bg-black hover:text-white border-black py-2 px-3 w-28 text-center rounded-2xl font-bold'>Previo</button>
+
+            <div className='border cursor-pointer border-white py-2 px-3 w-20 text-center rounded-2xl font-bold'>{`Page  ${currentPage}/${totalPages}`}</div>
+            <button 
+            type='button' 
+            onClick={() => handleNext()}
+            className='border cursor-pointer hover:bg-black hover:text-white border-black py-2 px-3 w-28 text-center rounded-2xl font-bold'>Siguiente</button>
+         </div>
          
          {isModalOpen ? (<CountryModal setIsModalOpen={setIsModalOpen} country={currentModalCountry as Country} />):<></>}
-
-         {/* <CountryModalBox 
-            currentModalCountry={currentModalCountry as Country}
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
-
-         /> */}
       </>
   )
 }
