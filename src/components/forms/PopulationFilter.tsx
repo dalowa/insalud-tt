@@ -22,10 +22,14 @@ export const PopulationFilter = () => {
             setMaxPopulation(10000000);
             break;
          case 3:
+            setMinPopulation(10000000);
+            setMaxPopulation(50000000);
+            break;
+         case 4:
             setMinPopulation(50000000);
             setMaxPopulation(100000000);
             break;
-         case 4:
+         case 5:
             setMinPopulation(100000000);
             setMaxPopulation(1000000000);
             break;
@@ -44,8 +48,9 @@ export const PopulationFilter = () => {
                      <SelectItem value="0">All countries</SelectItem>
                      <SelectItem value="1">Less than 1 million</SelectItem>
                      <SelectItem value="2">1 – 10 million</SelectItem>
-                     <SelectItem value="3">50 – 100 million</SelectItem>
-                     <SelectItem value="4">More than 100 million</SelectItem>
+                     <SelectItem value="3">10 – 50 million</SelectItem>
+                     <SelectItem value="4">50 – 100 million</SelectItem>
+                     <SelectItem value="5">More than 100 million</SelectItem>
                   </SelectGroup>
                </SelectContent>
             </Select>
