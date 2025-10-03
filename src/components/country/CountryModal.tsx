@@ -1,9 +1,10 @@
+'use client'
+
 import { favoriteService } from '@/services/favoriteService'
 import { Country } from '@/types/countriesAPI-type'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { IconHeart } from './icons/IconHeart'
-import { IconClose } from './icons/IconClose'
+import { IconHeart,IconClose} from '../icons';
 
 interface CountryModalProps {
   country:  Country

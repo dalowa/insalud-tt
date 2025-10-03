@@ -2,9 +2,9 @@
 
 import { Country } from '@/types/countriesAPI-type';
 import React, { useEffect, useState } from 'react'
-import { CountryCard } from './CountryCard';
+import { CountryCard } from './country/CountryCard';
 import { useModalCountry } from '@/hooks';
-import { CountryModal } from './CountryModal';
+import { CountryModal } from './country';
 import { getFavorites } from '@/lib/utils/localStorage';
 
 export const DisplayFavorites = () => {
