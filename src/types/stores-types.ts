@@ -13,6 +13,7 @@ export interface CountriesState {
   minPopulation: number
   maxPopulation: number
   orderByCode: number
+  selectedPopulationRange: string
   
   // Pagination
   currentPage: number
@@ -39,4 +40,5 @@ export interface CountriesState {
   setCurrentModalCountry: (country: Country | null) => void
   setIsModalOpen: (isOpen: boolean) => void
   resetFilters: () => void
+  setSelectedPopulationRange: (code: string) => void
 }

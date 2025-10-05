@@ -1,7 +1,6 @@
 import { formatPopulation } from '@/lib/utils/format'
 import { Country } from '@/types/countriesAPI-type'
 import Image from 'next/image'
-import { IconHeart } from '../icons'
 import { useCountriesStore } from '@/store'
 
 interface CountryCardProps {
@@ -23,7 +22,7 @@ export function CountryCard({country} : CountryCardProps) {
          onClick={() => handleClickModal(country)}
       >
          
-         <div className='w-full h-40 relative overflow-hidden'>
+         <div className='w-full h-44 relative overflow-hidden'>
             <Image 
                src={country.flags.png ?? country.flags.svg}
                alt={`Country flag of ${country.name.common}`}
@@ -36,7 +35,6 @@ export function CountryCard({country} : CountryCardProps) {
             <p className="text-sm text-start px-3 py-1 bg-red-100 text-red-400 font-semibold  rounded-lg inline">{`${country.region}`}</p>
             <p className="font-bold text-start text-2xl tracking-wider">{country.name.common}</p>
             <p className="text-sm text-start md:text-base text-gray-600">{`Population: ${formatPopulation(country.population)}`}</p>
-            <IconHeart className='absolute w-6 h-6 top-4 right-4 text-gray-400 hover:text-red-400 transition-colors duration-200' />
          </div>
       </div>
    )

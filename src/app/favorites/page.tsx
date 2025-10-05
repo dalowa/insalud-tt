@@ -1,16 +1,17 @@
 import { DisplayFavorites } from '@/components/DisplayFavorites';
-import Link from 'next/link';
+import { HeaderTop } from '@/components/layout';
 import React from 'react';
 
-const Page = () => {
+const PageFavorites = () => {
   return (
-    <div className='font-sans flex flex-col min-h-screen pb-20 pt-10 gap-5 lg:gap-16'>
-      <h1 className="text-4xl sm:text-6xl font-bold text-center"> Favorites Countries of the World</h1>
-      <Link className="bg-green-400 py-3 px-6 w-44 text-center rounded-3xl font-bold mx-auto" href={"/"}>Go to Home</Link>
+    <div className='font-sans flex flex-col min-h-screen max-w-[var(--max-w-container)] mx-auto gap-5 lg:gap-16'>
+      <header className='px-3 py-5 flex flex-col w-full sm:px-5 max-w-[var(--max-w-container)] mx-auto'>
+        <HeaderTop />
+      </header>
       <DisplayFavorites />
     </div>
   );
 }
 
-export default Page;
+export default PageFavorites;
 

@@ -17,11 +17,12 @@ export const useCountriesStore = create<CountriesState>((set, get) => ({
   selectedRegion: '',
   minPopulation: 0,
   maxPopulation: 1000000000,
+  selectedPopulationRange: '',
   orderByCode: 0,
   
   // Pagination
   currentPage: 1,
-  itemsPerPage: 8,
+  itemsPerPage: 9,
   currentItems: [],
   totalPages: 0,
   
@@ -70,6 +71,10 @@ export const useCountriesStore = create<CountriesState>((set, get) => ({
   setOrderByCode: (code: number) => {
     set({ orderByCode: code, currentPage: 1 })
     get().applyFilters()
+  },
+  setSelectedPopulationRange: (code: string) => {
+    console.log('The code is', code)
+    set({selectedPopulationRange: code})
   },
 
   applyFilters: () => {
@@ -137,6 +142,7 @@ export const useCountriesStore = create<CountriesState>((set, get) => ({
     set({
       inputSearch: '',
       selectedRegion: '',
+      selectedPopulationRange: '',
       minPopulation: 0,
       maxPopulation: 1000000000,
       currentPage: 1
