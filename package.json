@@ -1,7 +1,22 @@
 {
-  "name": "insalud-tt",
-  "version": "0.1.0",
+  "name": "countries-explorer",
+  "version": "1.0.0",
+  "description": "Modern web application for exploring countries worldwide with search, filtering, and favorites system",
   "private": true,
+  "author": {
+    "name": "David Urbano",
+    "url": "https://davidurbanodev.vercel.app/"
+  },
+  "keywords": [
+    "countries",
+    "explorer",
+    "nextjs",
+    "react",
+    "typescript",
+    "tailwindcss",
+    "zustand",
+    "rest-api"
+  ],
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
