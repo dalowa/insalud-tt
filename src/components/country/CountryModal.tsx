@@ -34,7 +34,7 @@ export const CountryModal = () => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/35">
-      <div className='bg-white flex flex-col dark:bg-gray-800 rounded-lg shadow-lg w-[90%] min-h-80 p-4 relative max-w-80'>
+      <div className='bg-white flex flex-col animate-scale-in rounded-lg shadow-lg w-[90%] min-h-80 p-4 relative max-w-80'>
         <div className='flex items-center justify-start gap-2'>
           <div className='w-14 h-10 relative rounded-lg overflow-hidden '>
             <Image 
