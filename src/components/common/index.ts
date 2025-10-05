@@ -1,1 +1,0 @@
-export { ClearFiltersButton } from "./ClearFiltersButton";
